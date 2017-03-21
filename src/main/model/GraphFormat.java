@@ -12,6 +12,17 @@ public class GraphFormat {
     private String weight;
 
     public GraphFormat(String node1, String node2, String attr1, String weight,String edge){
+
+        //Test if to many Arguments were given.
+        if(node2 != null){
+            if(attr1 != null && weight != null)
+                throw new IllegalArgumentException();
+            if(attr1 != null && edge != null)
+                throw new IllegalArgumentException();
+            if(weight != null && edge != null)
+                throw new IllegalArgumentException();
+        }
+
         this.node1 = node1;
         this.node2 = node2;
         this.attr1 = attr1;
