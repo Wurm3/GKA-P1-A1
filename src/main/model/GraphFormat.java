@@ -7,11 +7,11 @@ package main.model;
 public class GraphFormat {
     private String node1;
     private String node2;
-    private int attr1;
+    private String attr1;
     private String edge;
-    private double weight;
+    private String weight;
 
-    public GraphFormat(String node1, String node2, int attr1, double weight,String edge){
+    public GraphFormat(String node1, String node2, String attr1, String weight,String edge){
         this.node1 = node1;
         this.node2 = node2;
         this.attr1 = attr1;
@@ -27,7 +27,7 @@ public class GraphFormat {
         return node2;
     }
 
-    public int getAttr1() {
+    public String getAttr1() {
         return attr1;
     }
 
@@ -41,7 +41,7 @@ public class GraphFormat {
         this.node2 = node2;
     }
 
-    public void setAttr1(int attr1) {
+    public void setAttr1(String attr1) {
         this.attr1 = attr1;
     }
 
@@ -54,17 +54,15 @@ public class GraphFormat {
         String str = "";
         str += node1;
         if(node2 != null){
-            //hi
             str += "," + node2;
-            if(attr1 != 0)
+            if(attr1 != null)
                 return str + " :" + attr1;
             if(edge != null)
                 return str + " (" + edge + ")";
-            if(weight != 0)
+            if(weight != null)
                 return str + " :: " + weight;
-        }
-        if(attr1 == 0)
             return str;
-        return str + ":" + attr1;
+        }
+        return attr1 == null ? str : str + ":" + attr1;
     }
 }
