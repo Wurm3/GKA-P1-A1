@@ -1,12 +1,5 @@
 package main.gui;
 
-import edu.uci.ics.jung.algorithms.layout.CircleLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.samples.SimpleGraphDraw;
-import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
-import edu.uci.ics.jung.visualization.VisualizationViewer;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +11,8 @@ import java.awt.event.ActionListener;
 public class MainWindow extends JFrame implements ActionListener {
     private JMenuItem createNew;
     private JMenuItem createExisting;
+    private JMenuItem addGraph;
+    private JMenuItem removeGraph;
 
     private int width = 1200;
     private int height = 800;
@@ -45,10 +40,12 @@ public class MainWindow extends JFrame implements ActionListener {
 
         JMenu edit = new JMenu("Edit");
 
-        JMenuItem addGraph = new JMenuItem("Add Graph...");
-        JMenuItem removeGraph = new JMenuItem("Remove Graph...");
+        addGraph = new JMenuItem("Add Graph...");
+        removeGraph = new JMenuItem("Remove Graph...");
         addGraph.setEnabled(false);
         removeGraph.setEnabled(false);
+        addGraph.addActionListener(this);
+        removeGraph.addActionListener(this);
 
         edit.add(addGraph);
         edit.add(removeGraph);
@@ -64,6 +61,7 @@ public class MainWindow extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
             if(e.getSource() == createNew) createNewGraph();
             else if(e.getSource() == createExisting) System.out.println("Open Project...");
+            else if(e.getSource() == addGraph) createGraphDialog();
     }
 
     private void createNewGraph(){
@@ -75,7 +73,18 @@ public class MainWindow extends JFrame implements ActionListener {
         panel.setVisible(true);
         getContentPane().add(panel);
 
-        setVisible(false);
+        addGraph.setEnabled(true);
+        removeGraph.setEnabled(true);
+
+        //setVisible(false);
         setVisible(true);
+    }
+
+    private void createGraphDialog(){
+        CreateDialog dialog = new CreateDialog();
+    }
+
+    public void refresh(){
+        refresh();
     }
 }
